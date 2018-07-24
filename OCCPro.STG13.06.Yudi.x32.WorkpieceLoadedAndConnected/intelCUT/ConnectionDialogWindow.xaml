@@ -1,0 +1,21 @@
+﻿<Window x:Class="OnlineCuttingControlProcess.ConnectionDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Connection Dialog" Height="326" Width="514" Left="500" Top="300" Icon="connect.ico">
+    <Grid Margin="0,0,2,-1">
+        <TextBox x:Name="textName" HorizontalAlignment="Left" Height="21" Margin="368,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textIP" HorizontalAlignment="Left" Height="21" Margin="368,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="textIP_PreviewTextInput"/>
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Height="23" Margin="408,120,0,0" VerticalAlignment="Top" Width="80" Click="addButton_Click"/>
+        <ListBox x:Name="cncNameList" HorizontalAlignment="Left" Height="180" Margin="11,56,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cncNameList_SelectionChanged"/>
+        <ListBox x:Name="cncIPAddress" HorizontalAlignment="Left" Height="181" Margin="134,56,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False" RenderTransformOrigin="0.383,0.486"/>
+        <TextBlock HorizontalAlignment="Left" Height="15" Margin="11,38,0,0" TextWrapping="Wrap" Text="CNC Machine Name" VerticalAlignment="Top" Width="144"/>
+        <TextBlock HorizontalAlignment="Left" Height="19" Margin="136,38,0,0" TextWrapping="Wrap" Text="IP Address" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="deleteButton" Content="Delete" HorizontalAlignment="Left" Height="23" Margin="270,215,0,0" VerticalAlignment="Top" Width="80" Click="deleteButton_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="293,57,0,0" TextWrapping="Wrap" Text="Name Entry" VerticalAlignment="Top" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="294,82,0,0" TextWrapping="Wrap" Text="IP Entry" VerticalAlignment="Top" Width="69"/>
+        <Button x:Name="testPingButton" Content="Ping Test" HorizontalAlignment="Left" Height="23" Margin="11,256,0,0" VerticalAlignment="Top" Width="120" Click="testPingButton_Click" IsEnabled="False"/>
+        <Button x:Name="pingingOkay" Content="Connect" HorizontalAlignment="Left" Height="23" Margin="408,256,0,0" VerticalAlignment="Top" Width="80" IsEnabled="False" Click="pingingOkay_Click" FontSize="14" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="11,10,0,0" TextWrapping="Wrap" Text="Status:" VerticalAlignment="Top" Width="46" FontWeight="Bold"/>
+        <TextBlock x:Name="pingingStatusDisplay" HorizontalAlignment="Left" Height="23" Margin="61,10,0,0" TextWrapping="Wrap" Text="No Connection" VerticalAlignment="Top" Width="427"/>
+    </Grid>
+</Window>

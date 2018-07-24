@@ -1,0 +1,16 @@
+﻿<Window x:Name="ToolGeometryDialogWindow" x:Class="OnlineCuttingControlProcess.ToolGeoDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tool Dialog" Height="193" Width="250" Left="600" Top="300" Background="#FFEEECEC" Activated="ToolGeometryDialogWindow_Activated" Icon="millingH.ico">
+    <Grid>
+        <TextBox x:Name="ToolDiameterTextBox" MaxLength="8" HorizontalAlignment="Left" Height="26" Margin="120,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" FontSize="18" FontWeight="Bold" TextAlignment="Right" PreviewTextInput="ToolDiameterTextBox_PreviewTextInput"/>
+        <TextBox x:Name="ToolLenghtTextBox" MaxLength="8" HorizontalAlignment="Left" Height="26" Margin="120,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" FontSize="18" FontWeight="Bold" TextAlignment="Right" PreviewTextInput="ToolLenghtTextBox_PreviewTextInput"/>
+        <TextBox x:Name="ToolNumbOfTeethTextBox" MaxLength="2" HorizontalAlignment="Left" Height="26" Margin="120,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" FontSize="18" FontWeight="Bold" TextAlignment="Right" PreviewTextInput="ToolNumbOfTeethTextBox_PreviewTextInput"/>
+        <Button x:Name="toolGeoDialogOkay" Content="OK" HorizontalAlignment="Left" Height="23" Margin="152,119,0,0" VerticalAlignment="Top" Width="72" FontWeight="Bold" Click="toolGeoDialogOkay_Click" FontSize="14"/>
+        <Button x:Name="toolGeoDialogClear" Content="Clear" HorizontalAlignment="Left" Height="23" Margin="10,119,0,0" VerticalAlignment="Top" Width="77" FontWeight="Bold" Click="toolGeoDialogClear_Click"/>
+        <Label Content="Diameter (mm)" HorizontalAlignment="Left" Height="26" Margin="20,15,0,0" VerticalAlignment="Top" Width="108"/>
+        <Label Content="Lenght (mm)" HorizontalAlignment="Left" Height="26" Margin="21,46,0,0" VerticalAlignment="Top" Width="108"/>
+        <Label Content="Number of Teeth" HorizontalAlignment="Left" Height="26" Margin="21,78,0,0" VerticalAlignment="Top" Width="108"/>
+
+    </Grid>
+</Window>

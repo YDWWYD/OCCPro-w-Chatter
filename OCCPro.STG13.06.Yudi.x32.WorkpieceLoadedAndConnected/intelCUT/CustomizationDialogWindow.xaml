@@ -1,0 +1,302 @@
+﻿<Window x:Class="OnlineCuttingControlProcess.CustomizationDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Customization Dialog" Height="507.594" Width="797.256" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Icon="Customization.ico">
+    <Grid Background="#FFF7EDED" Margin="0,-1,0,2">
+        <Label Content="General Settings" HorizontalAlignment="Left" Height="30" Margin="10,3,0,0" VerticalAlignment="Top" Width="761" FontSize="16" FontWeight="Bold" Background="#FF514F4F" Foreground="#FFF3F1F1"/>
+        <Label Content="Control Processes" HorizontalAlignment="Left" Height="30" Margin="18,32,0,0" VerticalAlignment="Top" Width="193" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="ToolBreakageCheckBox" Content="Tool Breakage" Margin="26,63,0,0" VerticalAlignment="Top" Height="24" Width="178" FontSize="16" HorizontalAlignment="Left" Checked="ToolBreakageCheckBox_Checked" Unchecked="ToolBreakageCheckBox_Unchecked"/>
+        <CheckBox x:Name="AdaptiveContCheckBox" Content="Adaptive Control" Margin="26,87,0,0" VerticalAlignment="Top" Height="24" Width="157" FontSize="16" HorizontalAlignment="Left" Checked="AdaptiveContCheckBox_Checked"  Unchecked="AdaptiveContCheckBox_Unchecked"/>
+        <CheckBox x:Name="VirtualRealConnCheckBox" Content="Virtual-Real Connection" Margin="26,111,0,0" VerticalAlignment="Top" Height="24" Width="187" FontSize="16" HorizontalAlignment="Left" Checked="VirtualRealConnCheckBox_Checked"  Unchecked="VirtualRealConnCheckBox_Unchecked"/>
+        <CheckBox x:Name="FeedBackCheckBox" Content="Feed Back to Real" Margin="26,136,0,0" VerticalAlignment="Top" Height="24" Width="152" FontSize="16" HorizontalAlignment="Left" Checked="FeedBackCheckBox_Checked"  Unchecked="FeedBackCheckBox_Unchecked"/>
+        <CheckBox x:Name="ChatterCheckBox" Content="Chatter Detection" Margin="26,161,0,0" VerticalAlignment="Top" Height="24" Width="167" FontSize="16" HorizontalAlignment="Left"/>
+        <Grid HorizontalAlignment="Left" Height="2" Margin="146,121,0,0" VerticalAlignment="Top" Width="160" RenderTransformOrigin="0.5,0.5" Background="#FFCDCACA">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="89.996"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <Label Content="Motor Parameters" HorizontalAlignment="Left" Height="30" Margin="265,34,0,0" VerticalAlignment="Top" Width="150" FontSize="16" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="271,63,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtX info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="X"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtX [Nm/A]" HorizontalAlignment="Left" Height="30" Margin="237,54,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtX info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtXTextBox" HorizontalAlignment="Left" Height="19" Margin="398,66,0,0" TextWrapping="Wrap" Text="1.964" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="KtXTextBox_TextChanged" PreviewTextInput="KtXTextBox_PreviewTextInput"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="271,86,0,0" VerticalAlignment="Top" Width="90" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtY info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="Y"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtY [Nm/A]" HorizontalAlignment="Left" Height="30" Margin="265,79,0,0" VerticalAlignment="Top" Width="90" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtY info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtYTextBox" HorizontalAlignment="Left" Height="19" Margin="398,88,0,0" TextWrapping="Wrap" Text="1.964" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="KtYTextBox_TextChanged" PreviewTextInput="KtYTextBox_PreviewTextInput"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="271,108,0,0" VerticalAlignment="Top" Width="90" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtZ info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="Z"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtZ [Nm/A] " HorizontalAlignment="Left" Height="30" Margin="265,101,0,0" VerticalAlignment="Top" Width="90" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtZ info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtZTextBox" HorizontalAlignment="Left" Height="19" Margin="398,110,0,0" TextWrapping="Wrap" Text="1.964" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="KtZTextBox_TextChanged" PreviewTextInput="KtZTextBox_PreviewTextInput"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="270,130,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtC info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="C"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtC [Nm/A] " HorizontalAlignment="Left" Height="30" Margin="265,123,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtC info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtCTextBox" HorizontalAlignment="Left" Height="19" Margin="398,132,0,0" TextWrapping="Wrap" Text="1.522" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="KtCTextBox_TextChanged" PreviewTextInput="KtCTextBox_PreviewTextInput"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="270,153,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtA info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="A"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtA [Nm/A]" HorizontalAlignment="Left" Height="30" Margin="265,146,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtA info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtATextBox" HorizontalAlignment="Left" Height="19" Margin="398,155,0,0" TextWrapping="Wrap" Text="2.106" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="KtATextBox_TextChanged" PreviewTextInput="KtATextBox_PreviewTextInput"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="271,175,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtS info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+            Kt<Run FontSize="12" BaselineAlignment="Subscript" Text="S"/> [Nm/A]
+        </TextBlock>
+        <!--<Label Content="KtS [Nm/A] " HorizontalAlignment="Left" Height="30" Margin="265,168,0,0" VerticalAlignment="Top" Width="89" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>KtS info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>-->
+        <TextBox x:Name="KtSTextBox" HorizontalAlignment="Left" Height="19" Margin="398,177,0,0" TextWrapping="Wrap" Text="1.571" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" PreviewTextInput="KtSTextBox_PreviewTextInput"/>
+        <Grid HorizontalAlignment="Left" Height="2" Margin="426,120,0,0" VerticalAlignment="Top" Width="156" RenderTransformOrigin="0.5,0.5" Background="#FFCDCACA">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.227"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <Label Content="Process Parameters" HorizontalAlignment="Left" Height="30" Margin="510,34,0,0" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Tracking Tolerance [+/-mm]" HorizontalAlignment="Left" Height="30" Margin="510,82,0,0" VerticalAlignment="Top" Width="205" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Simulated data tracking tolerance</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="TrackTolTextBox" HorizontalAlignment="Left" Height="19" Margin="713,90,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="TrackTolTextBox_TextChanged" PreviewTextInput="TrackTolTextBox_PreviewTextInput"/>
+        <Label Content="Spindle Air Cut Torque [Nm]" HorizontalAlignment="Left" Height="30" Margin="510,104,0,0" VerticalAlignment="Top" Width="202" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Spindle air cut torque info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="SpindleExhaustTextBox" HorizontalAlignment="Left" Height="19" Margin="713,112,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="SpindleExhaustTextBox_TextChanged" PreviewTextInput="SpindleExhaustTextBox_PreviewTextInput"/>
+        <Label Content="Sampling Time [msec]" HorizontalAlignment="Left" Height="30" Margin="510,60,0,0" VerticalAlignment="Top" Width="192" FontSize="14"/>
+        <TextBox x:Name="SamplingTimeTextBox" HorizontalAlignment="Left" Height="19" Margin="713,67,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" PreviewTextInput="SamplingTimeTextBox_PreviewTextInput" TextChanged="SamplingTimeTextBox_TextChanged"/>
+        <!--<Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="510,119,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="FFF" HorizontalAlignment="Left" Height="19" Margin="713,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>
+        <Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="510,145,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="GGG" HorizontalAlignment="Left" Height="19" Margin="713,151,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>
+        <Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="510,166,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="HHH" HorizontalAlignment="Left" Height="19" Margin="713,173,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>-->
+
+
+        <Label Content="Tool Breakage Settings" HorizontalAlignment="Left" Height="30" Margin="10,211,0,0" VerticalAlignment="Top" Width="212" FontSize="16" FontWeight="Bold" Background="#FF444242" Foreground="#FFF3F1F1"/>
+        <Label Content="Action to be Taken" HorizontalAlignment="Left" Height="30" Margin="20,246,0,0" VerticalAlignment="Top" Width="185" FontSize="16" FontWeight="Bold"/>
+        <ComboBox x:Name="ToolBreakageActionsComboBox" HorizontalAlignment="Left" Height="25" Margin="25,277,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label Content="Breakage Parameters" HorizontalAlignment="Left" Height="30" Margin="19,307,0,0" VerticalAlignment="Top" Width="186" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Threshold [%]" HorizontalAlignment="Left" Height="30" Margin="19,333,0,0" VerticalAlignment="Top" Width="120" FontSize="16">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Threshold info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="thresholdTextBox" HorizontalAlignment="Left" Height="19" Margin="149,339,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="thresholdTextBox_TextChanged" PreviewTextInput="thresholdTextBox_PreviewTextInput"/>
+        <Grid HorizontalAlignment="Left" Height="2" Margin="424,332,0,0" VerticalAlignment="Top" Width="159" RenderTransformOrigin="0.5,0.5" Background="#FFCDCACA">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.509"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <!--<CheckBox x:Name="delFaCheckBox" Content="Enable delFa" Margin="260,306,0,0" VerticalAlignment="Top" Height="24" Width="128" FontSize="16" HorizontalAlignment="Left"/>
+        <CheckBox x:Name="delNFaCheckBox" Content="Enable delNFa" Margin="260,332,0,0" VerticalAlignment="Top" Height="24" Width="128" FontSize="16" HorizontalAlignment="Left"/>-->
+        <Grid HorizontalAlignment="Left" Height="2" Margin="125,312,0,0" VerticalAlignment="Top" Width="199" RenderTransformOrigin="0.5,0.5" Background="#FFCDCACA">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.39"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <Label Content="Adaptive Control Settings" HorizontalAlignment="Left" Height="30" Margin="228,212,0,0" VerticalAlignment="Top" Width="543" FontSize="16" FontWeight="Bold" Background="#FF444242" Foreground="#FFF3F1F1"/>
+        <Label Content="Control Parameters" HorizontalAlignment="Left" Height="30" Margin="508,248,0,0" VerticalAlignment="Top" Width="204" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Reference Force [N]" HorizontalAlignment="Left" Height="30" Margin="509,272,0,0" VerticalAlignment="Top" Width="181" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>GPC Force info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="GPCforceTextBox" HorizontalAlignment="Left" Height="19" Margin="712,277,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="GPCforceTextBox_TextChanged" PreviewTextInput="GPCforceTextBox_PreviewTextInput"/>
+        <!--<Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="409,315,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="MaxStorqTextBox_Copy1" HorizontalAlignment="Left" Height="19" Margin="510,322,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>
+        <Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="409,336,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="TurnSampleTextBox_Copy1" HorizontalAlignment="Left" Height="19" Margin="510,344,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>
+        <Label Content="Feat" HorizontalAlignment="Left" Height="30" Margin="409,360,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <TextBox x:Name="KtATextBox_Copy2" HorizontalAlignment="Left" Height="19" Margin="510,367,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold"/>-->
+        <Label Content="Lambda" HorizontalAlignment="Left" Height="30" Margin="509,295,0,0" VerticalAlignment="Top" Width="127" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Weighting factor</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="LambdaTextBox" HorizontalAlignment="Left" Height="19" Margin="713,300,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="LambdaTextBox_TextChanged" PreviewTextInput="LambdaTextBox_PreviewTextInput"/>
+        <Label x:Name="ForceOverShootLabel1" Content="Force Overshoot Tolerance [%]" HorizontalAlignment="Left" Height="30" Margin="508,318,0,0" VerticalAlignment="Top" Width="200" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Force Over Shoot Time info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="ForceOvershootTextBox" HorizontalAlignment="Left" Height="19" Margin="713,323,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="ForceOvershootTextBox_TextChanged" PreviewTextInput="ForceOvershootTextBox_PreviewTextInput"/>
+        <Label x:Name="GoToCheckTimeLabel" Content="Go to Check Time [sec]" HorizontalAlignment="Left" Height="30" Margin="507,340,0,0" VerticalAlignment="Top" Width="195" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Go To Check info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="GoToCheckTextBox" HorizontalAlignment="Left" Height="19" Margin="713,345,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="GoToCheckTextBox_TextChanged" PreviewTextInput="GoToCheckTextBox_PreviewTextInput"/>
+        <Label x:Name="DelayCompTimeLabel" Content="Delay Compensation Time [sec]" HorizontalAlignment="Left" Height="30" Margin="507,363,0,0" VerticalAlignment="Top" Width="206" FontSize="14">
+            <Label.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <!--<TextBlock FontWeight="Bold">Submit Request</TextBlock>-->
+                        <TextBlock>Delay Compansation Time info.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Label.ToolTip>
+        </Label>
+        <TextBox x:Name="DelayCompTextBox" HorizontalAlignment="Left" Height="19" Margin="713,368,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextAlignment="Right" FontWeight="Bold" TextChanged="DelayCompTextBox_TextChanged" PreviewTextInput="DelayCompTextBox_PreviewTextInput"/>
+
+        <Grid HorizontalAlignment="Left" Height="3" Margin="10,421,0,0" VerticalAlignment="Top" Width="760" Background="#FFA8A7A7"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Height="25" Margin="56,434,0,0" VerticalAlignment="Top" Width="116" FontWeight="Bold" FontSize="14" Click="ResetButton_Click"/>
+        <Button x:Name="OkayButton" Content="OK" HorizontalAlignment="Left" Height="25" Margin="595,434,0,0" VerticalAlignment="Top" Width="116" FontWeight="Bold" FontSize="14" Click="OkayButton_Click"/>
+        <Label Content="Force Usage" HorizontalAlignment="Left" Height="30" Margin="231,248,0,0" VerticalAlignment="Top" Width="124" FontSize="16" FontWeight="Bold"/>
+        <CheckBox x:Name="PeekForceCheckBox" Content="Peak Force [per spindle period]" Margin="234,281,0,0" VerticalAlignment="Top" Height="24" Width="242" FontSize="16" HorizontalAlignment="Left"  Unchecked="PeekForceCheckBox_Unchecked" Checked="PeekForceCheckBox_Checked"/>
+        <CheckBox x:Name="AverageForceCheckBox" Content="Average Force [per spindle period]" Margin="234,307,0,0" VerticalAlignment="Top" Height="24" Width="263" FontSize="16" HorizontalAlignment="Left" Checked="AverageForceCheckBox_Checked" Unchecked="AverageForceCheckBox_Unchecked"/>
+
+
+    </Grid>
+</Window>

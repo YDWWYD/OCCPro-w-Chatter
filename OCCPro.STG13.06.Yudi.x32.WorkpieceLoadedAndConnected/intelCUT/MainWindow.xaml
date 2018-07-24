@@ -1,0 +1,315 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mdi="clr-namespace:WPF.MDI;assembly=WPF.MDI"    
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="OnlineCuttingControlProcess.MainWindow"
+        Title="intelCUT - Intelligent Online Cutting Control (OCC) Process on Computer Numerical Control (CNC) Machining ©      Version 01.00" 
+        Height="900" Width="1416" Icon="CNCMach.ico" Background="White" Closing="OnWindowClosing" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid RenderTransformOrigin="0.463,0.303" Margin="0,0,0,-5">
+        <Menu x:Name="mainMenu" Height="27" VerticalAlignment="Top" Margin="0,4,0,0" Grid.ColumnSpan="2">
+            <MenuItem x:Name="configMenu" Header="Configuration">
+                <MenuItem x:Name="CNCTypeMenuItem" Header="CNC Type">
+                    <MenuItem.Icon>
+                        <Image Source="CNCmach.ico"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="HEIDENHAIN"  Click="heidenhainCncType"/>
+                    <MenuItem Header="FANUC" Click="fanucCncType"/>
+                    <MenuItem Header="SIEMENS" Click="siemensCncType"/>
+                    <MenuItem Header="Not Specified" Click="notSpecifiedCncType"/>
+                </MenuItem>
+                <MenuItem x:Name="ConnectionMenuItem" Header="Connection">
+                    <MenuItem.Icon>
+                        <Image Source="connect.ico"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="ON" Click="connectionOn"/>
+                    <MenuItem Header="OFF" Click="connectionOff"/>
+                </MenuItem>
+                <MenuItem x:Name="InputDataMenuItem" Header="Simulated Data">
+                    <MenuItem.Icon>
+                        <Image Source="data.ico"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="LOAD" Click="inputDataLoad"/>
+                    <MenuItem Header="UNLOAD" Click="inputDataUnload"/>
+                </MenuItem>
+                <MenuItem Header="Tool Geometry" Click="toolGeoSetting">
+                    <MenuItem.Icon>
+                        <Image Source="milling2.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Options">
+                <MenuItem Header="Workpiece Geometry">
+                    <MenuItem Header="LOAD" Click="workPieceGeoLoad"/>
+                    <MenuItem Header="UNLOAD" Click="workPieceGeoUnload"/>
+                </MenuItem>
+                <MenuItem Header="Data Recording">
+                    <MenuItem Header="ON" Click="dataRecordingOn_Click"/>
+                    <MenuItem Header="OFF" Click="dataRecordingOff_Click"/>
+                </MenuItem>
+                <MenuItem Header="Kalman Filtering">
+                    <MenuItem Header="Position X">
+                        <MenuItem Header="ACTIVATE/Re-Open"  Click="KalmanAxisX_ON_Click"/>
+                        <MenuItem Header="DEACTIVATE" Click="KalmanAxisX_OFF_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Position Y">
+                        <MenuItem Header="ACTIVATE/Re-Open" Click="KalmanAxisY_ON_Click"/>
+                        <MenuItem Header="DEACTIVATE" Click="KalmanAxisY_OFF_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Position Z">
+                        <MenuItem Header="ACTIVATE/Re-Open" Click="KalmanAxisZ_ON_Click"/>
+                        <MenuItem Header="DEACTIVATE" Click="KalmanAxisZ_OFF_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="DEACTIVATE ALL" Click="KalmanDeactivate_Click"/>
+                </MenuItem>
+                <MenuItem Header="TEST MODE">
+                    <MenuItem Header="ON-STANDALONE" Click="TestOnStandalone_Click"/>
+                    <MenuItem Header="ON-DEPENDENT" Click="TestOnDependent_Click"/>
+                    <MenuItem Header="OFF" Click="TestOff_Click"/>
+                </MenuItem>
+                <MenuItem Header="Customization" Click="Customization_Click"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem x:Name="DataRecordGraphSubMenu" Header="Graphic Records" >
+                    <MenuItem Header="Single">
+                        <MenuItem Header="Fa" Click="SingleGraphFa_Click"/>
+                        <MenuItem Header="eta1" Click="SingleGraphEta1_Click"/>
+                        <MenuItem Header="eta2" Click="SingleGraphEta2_Click"/>
+                        <MenuItem Header="FeedR" Click="SingleGraphFeedR_Click"/>
+                        <MenuItem Header="Force" Click="SingleGraphForce_Click"/>
+                        <MenuItem Header="FeedR[U]" Click="SingleGraphFeedR_U_Click"/>
+                        <MenuItem Header="Force[Y]" Click="SingleGraphForce_Y_Click"/>
+                        <MenuItem Header="Kt-Upd" Click="SingleGraphKtUpd_Click"/>
+                        <MenuItem Header="F-Sim" Click="SingleGraphF_Sim_Click"/>
+                        <MenuItem Header="F-Mean" Click="SingleGraphF_Mean_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Compare">
+                        <MenuItem Header="Fa" Click="CompareGraphFa_Click"/>
+                        <MenuItem Header="eta1" Click="CompareGraphEta1_Click"/>
+                        <MenuItem Header="eta2" Click="CompareGraphEta2_Click"/>
+                        <MenuItem Header="FeedR">
+                            <MenuItem Header="FeedR" Click="CompareGraphFeedR_Click"/>
+                            <MenuItem Header="FeedR[U]" Click="CompareGraphFeedRU_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Force">
+                            <MenuItem Header="Force" Click="CompareGraphForce_Click"/>
+                            <MenuItem Header="Force[Y]" Click="CompareGraphForceY_Click"/>
+                            <MenuItem Header="F-Sim" Click="CompareGraphForceS_Click"/>
+                            <MenuItem Header="F-Mean" Click="CompareGraphForceM_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="FeedR[U]">
+                            <MenuItem Header="FeedR" Click="CompareGraphUFeedR_Click"/>
+                            <MenuItem Header="FeedR[U]" Click="CompareGraphUFeedRU_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Force[Y]">
+                            <MenuItem Header="Force" Click="CompareGraphForce_YF_Click"/>
+                            <MenuItem Header="Force[Y]" Click="CompareGraphForce_Y_Click"/>
+                            <MenuItem Header="F-Sim" Click="CompareGraphForce_YS_Click"/>
+                            <MenuItem Header="F-Mean" Click="CompareGraphForce_YM_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Kt-Upd" Click="CompareGraphKtUpd_Click"/>
+                        <MenuItem Header="F-Sim">
+                            <MenuItem Header="Force" Click="CompareGraphF_SimF_Click"/>
+                            <MenuItem Header="Force[Y]" Click="CompareGraphF_SimY_Click"/>
+                            <MenuItem Header="F-Sim" Click="CompareGraphF_Sim_Click"/>
+                            <MenuItem Header="F-Mean" Click="CompareGraphF_SimM_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="F-Mean">
+                            <MenuItem Header="Force" Click="CompareGraphF_MeanF_Click"/>
+                            <MenuItem Header="Force[Y]" Click="CompareGraphF_MeanY_Click"/>
+                            <MenuItem Header="F-Sim" Click="CompareGraphF_MeanS_Click"/>
+                            <MenuItem Header="F-Mean" Click="CompareGraphF_Mean_Click"/>
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem x:Name="DataRecordTextSubMenu" Header="Data Records">
+                    <MenuItem Header="Main" Click="DataRecordsMain_Click"/>
+                    <MenuItem Header="Fa" Click="DataRecordsFa_Click"/>
+                    <MenuItem Header="eta1" Click="DataRecordsEta1_Click"/>
+                    <MenuItem Header="eta2" Click="DataRecordsEta2_Click"/>
+                    <MenuItem Header="FeedR" Click="DataRecordsFeedR_Click"/>
+                    <MenuItem Header="Force" Click="DataRecordsForce_Click"/>
+                    <MenuItem Header="FeedR[U]" Click="DataRecordsFeedR_U_Click"/>
+                    <MenuItem Header="Force[Y]" Click="DataRecordsForce_Y_Click"/>
+                    <MenuItem Header="Kt-Upd" Click="DataRecordsKtUpd_Click"/>
+                    <MenuItem Header="F-Sim" Click="DataRecordsF_Sim_Click"/>
+                    <MenuItem Header="F-Mean" Click="DataRecordsF_Mean_Click"/>
+                </MenuItem>
+                <MenuItem Header="Online Graphics">
+                    <MenuItem Header="Force vs. Distance" Click="ForceVsDisMonitoring_Click"/>
+                    <MenuItem Header="Spindle Torque vs. Distance" Click="SpindleVsDisMonitoring_Click"/>
+                    <MenuItem Header="Feed Rate vs. Distance"/>
+                    <MenuItem Header="X Cutting Force vs. Time"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Run">
+                <MenuItem Header="Start" Click="RunStart_Click"/>
+                <MenuItem Header="Stop" Click="RunStop_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Dependencies" Click="Dependencies_Click"/>
+                <MenuItem Header="Prerequsites" Click="Prerequsites_Click"/>
+                <MenuItem Header="Connection Setup" Click="ConnectionSetUp_Click"/>
+                <MenuItem Header="User Guide" Click="UserGuide_Click"/>
+                <MenuItem Header="Contact Us" Click="ContactUs_Click"/>
+            </MenuItem>
+            <Separator Width="14"/>
+            <Label Content="Simulated Data File:" FontWeight="Bold"/>
+            <ListBoxItem x:Name="inputDataFileName" Content="                                                      " Height="20" Width="540" Background="#FFF9FAFA" TabIndex="0"/>
+            <Button x:Name="tracingStatusButton" Content="NOT STARTED" Width="144" FontWeight="Bold"/>
+            <Button x:Name="processTimeButton" Content="PROCESS TIME" FontWeight="Bold" Width="120"/>
+            <Button x:Name="alarmStatus" Content="NO ALARM" Width="130" FontWeight="Bold"/>
+        </Menu>
+        <Border x:Name="configPanel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="263" Margin="4,34,0,0" VerticalAlignment="Top" Width="167">
+            <TextBox HorizontalAlignment="Left" Height="47" Margin="2,22,0,0" TextWrapping="Wrap" Text="                CNC Type" VerticalAlignment="Top" Width="161"/>
+        </Border>
+        <Button x:Name="cncTypeButton" Content="NOT SPECIFIED" HorizontalAlignment="Left" Height="22" Margin="13,78,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="5,35,0,0" TextWrapping="Wrap" Text="         CONFIGURATION" VerticalAlignment="Top" Width="165" FontWeight="Bold" Background="#FFFFA200" Foreground="#FFFEFEFE"/>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,106,0,0" TextWrapping="Wrap" Text="              Connection" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="connectionCncButton" Content="OFF" HorizontalAlignment="Left" Height="22" Margin="13,127,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,155,0,0" TextWrapping="Wrap" Text="           Simulated Data" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="inputDataButton" Content="NOT LOADED" HorizontalAlignment="Left" Height="22" Margin="13,176,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <ProgressBar x:Name="SimDataProgressBar" Value="0" Foreground="LightGreen" HorizontalAlignment="Left" Height="22" Margin="13,176,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <Border x:Name="SimDataBorder" BorderThickness="1" BorderBrush="#FF727272" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="13,176,0,0" VerticalAlignment="Top" Width="149" RenderTransformOrigin="-0.517,-0.136" MouseLeave="SimDataBorder_MouseLeave" MouseMove="SimDataBorder_MouseMove">
+            <TextBlock x:Name="SimDataTextBox" Text="           NOT LOADED" FontWeight="Bold"/>
+        </Border>
+        <TextBox HorizontalAlignment="Left" Height="90" Margin="7,204,0,0" TextWrapping="Wrap" Text="           Tool Geometry" VerticalAlignment="Top" Width="161"/>
+        <Border x:Name="optionsPanel" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="276" Margin="4,469,0,0" VerticalAlignment="Top" Width="167">
+            <TextBox HorizontalAlignment="Left" Height="47" Margin="2,22,0,0" TextWrapping="Wrap" Text="       Workpiece Geometry" VerticalAlignment="Top" Width="161"/>
+        </Border>
+        <Button x:Name="workPieceGeoButton" Content="NOT LOADED" HorizontalAlignment="Left" Height="22" Margin="13,513,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <ProgressBar x:Name="WorkPieceProgressBar" Value="0" Foreground="LightGreen" HorizontalAlignment="Left" Height="22" Margin="13,513,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <Border x:Name="WorkPieceBorder" BorderThickness="1" BorderBrush="#FF727272" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="13,513,0,0" VerticalAlignment="Top" Width="149" RenderTransformOrigin="-0.517,-0.136" MouseLeave="WorkPieceBorder_MouseLeave" MouseMove="WorkPieceBorder_MouseMove">
+            <TextBlock x:Name="WorkPieceTextBox" Text="            NOT LOADED" FontWeight="Bold"/>
+        </Border>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="5,470,0,0" TextWrapping="Wrap" Text="                OPTIONS" VerticalAlignment="Top" Width="165" FontWeight="Bold" Background="#FF040983" Foreground="#FFFEFEFE"/>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,542,0,0" TextWrapping="Wrap" Text="           Data Recording" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="outputDataFolderButton" Content="OFF" HorizontalAlignment="Left" Height="22" Margin="13,563,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,593,0,0" TextWrapping="Wrap" Text="           Kalman Filtering" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="KalmanFilteringButton" Content="NOT ACTIVATED" HorizontalAlignment="Left" Height="22" Margin="13,614,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,644,0,0" TextWrapping="Wrap" Text="              TEST MODE" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="TestOnButton" Content="OFF" HorizontalAlignment="Left" Height="22" Margin="13,665,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <ProgressBar x:Name="TestOnProgressBar" Value="0" Foreground="LightGreen" HorizontalAlignment="Left" Height="22" Margin="13,665,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <Border x:Name="TestOnBorder" BorderThickness="1" BorderBrush="#FF727272" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="13,665,0,0" VerticalAlignment="Top" Width="149" RenderTransformOrigin="-0.517,-0.136" MouseLeave="TestBorder_MouseLeave" MouseMove="TestBorder_MouseMove">
+            <TextBlock x:Name="TestOnTextBox" Text="                   OFF" FontWeight="Bold"/>
+        </Border>
+        <TextBox HorizontalAlignment="Left" Height="47" Margin="7,694,0,0" TextWrapping="Wrap" Text="            Customization" VerticalAlignment="Top" Width="161"/>
+        <Button x:Name="CustomizationButton" Content="NOT ACTIVATED" HorizontalAlignment="Left" Height="22" Margin="13,715,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold" RenderTransformOrigin="-0.517,-0.136"/>
+        <Border BorderBrush="Black" BorderThickness="1" Background="#FFE5E5E5" HorizontalAlignment="Left" Height="825" Margin="172,34,0,0" VerticalAlignment="Top" Width="1225">
+            <TabControl x:Name="tabControlMenu" HorizontalAlignment="Left" Height="825" VerticalAlignment="Top" Width="1222" Margin="0,0,-1,0">
+                <TabItem x:Name="TrackingTabItem" Header="Tracking   " Margin="-2,-2,-42,0">
+                    <Grid Background="#FFE5E5E5" Margin="-2,-1,-5,-25">
+                        <ListView Name="tracingListView" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="716" Margin="1,25,0,0">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Line#" Width="70" DisplayMemberBinding="{Binding Path=lineNumb}" />
+                                    <GridViewColumn Header="G#" Width="40" DisplayMemberBinding="{Binding Path=GFileNumb}" />
+                                    <GridViewColumn Header="PosX(mm)" Width="75" DisplayMemberBinding="{Binding Path=posX}" />
+                                    <GridViewColumn Header="PosY(mm)" Width="75" DisplayMemberBinding="{Binding Path=posY}" />
+                                    <GridViewColumn Header="PosZ(mm)" Width="75" DisplayMemberBinding="{Binding Path=posZ}" />
+                                    <GridViewColumn Header="Feed(mm/min)" Width="90" DisplayMemberBinding="{Binding Path=feedRate}" />
+                                    <GridViewColumn Header="TFNC" Width="40" DisplayMemberBinding="{Binding Path=TFNC}" />
+                                    <!--<GridViewColumn Header="TFA(mm)" Width="52" DisplayMemberBinding="{Binding Path=TFA}" />
+                                    <GridViewColumn Header="TFB(mm)" Width="52" DisplayMemberBinding="{Binding Path=TFB}" />-->
+                                    <GridViewColumn Header="TFG(mm)" Width="60" DisplayMemberBinding="{Binding Path=TFG}" />
+                                    <GridViewColumn Header="Kt(N/mm^2)" Width="72" DisplayMemberBinding="{Binding Path=coeffKt}" />
+                                    <GridViewColumn Header="Force(N)" Width="90" DisplayMemberBinding="{Binding Path=force}" />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="SIMULATED INPUT DATA" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="716" FontWeight="Bold" Margin="1,0,0,0"/>
+                        <Frame x:Name="FollowerFrame" Content="Tool Path Frame" HorizontalAlignment="Left" Height="472" Margin="-1,297,0,0" VerticalAlignment="Top" Width="718"/>
+                        <Frame x:Name="FaRealTimeFrame" Content="Fa Frame" HorizontalAlignment="Left" Height="199" Margin="716,0,0,0" VerticalAlignment="Top" Width="507"/>
+                        <Frame x:Name="eta1RealTimeFrame" Content="eta1 Frame" HorizontalAlignment="Left" Height="198" Margin="716,200,0,0" VerticalAlignment="Top" Width="507"/>
+                        <Frame x:Name="FtORealTimeFrame" Content="FtO Frame" HorizontalAlignment="Left" Height="199" Margin="716,399,0,0" VerticalAlignment="Top" Width="507"/>
+                        <Frame x:Name="FeedrRealTimeFrame" Content="FeedR Frame" HorizontalAlignment="Left" Height="199" Margin="716,599,0,0" VerticalAlignment="Top" Width="507"/>
+                        <Border x:Name="RTcalculatedFrame" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="33" Margin="1,263,0,0" VerticalAlignment="Top" Width="716" Background="LightBlue"/>
+                        <Label Content="Kt [N/mm²]" HorizontalAlignment="Left" Height="27" Margin="6,263,0,0" VerticalAlignment="Top" Width="89" FontWeight="Bold" FontSize="14"/>
+                        <TextBox x:Name="KtTextBox" HorizontalAlignment="Left" Height="27" Margin="98,266,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="86" FontSize="16" TextAlignment="Right"/>
+                        <Button x:Name="TabItemTestModeButton" Content="TEST MODE ACTIVE" Background="Lime" HorizontalAlignment="Left" Height="20" Margin="555,-23,0,0" VerticalAlignment="Top" Width="162" FontWeight="Bold" Visibility="Hidden"/>
+                        <Button x:Name="TabItemToolProcessButton" Content="TOOL BREAKAGE" Background="LightSeaGreen" HorizontalAlignment="Left" Height="20" Margin="718,-23,0,0" VerticalAlignment="Top" Width="122" FontWeight="Bold"/>
+                        <Button x:Name="TabItemAdaptProcessButton" Content="ADAPTIVE CONTROL" Background="LightSeaGreen" HorizontalAlignment="Left" Height="20" Margin="845,-23,0,0" VerticalAlignment="Top" Width="122" FontWeight="Bold"/>
+                        <Button x:Name="TabItemVirtualFeedButton" Content="VIRTUAL/FEEDBACK" Background="LightSeaGreen" HorizontalAlignment="Left" Height="20" Margin="972,-23,0,0" VerticalAlignment="Top" Width="122" FontWeight="Bold"/>
+                        <Button x:Name="TabItemChatterProcessButton" Content="CHATTER CONTROL" Background="Gray" HorizontalAlignment="Left" Height="20" Margin="1099,-23,0,0" VerticalAlignment="Top" Width="122" FontWeight="Bold"/>
+                        <Border x:Name="RTcalculatedFrame_Copy" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="28" Margin="1,770,0,0" VerticalAlignment="Top" Width="716" Background="Beige"/>
+                        <Label Content="Unique Record File Name (Default: OCC)" HorizontalAlignment="Left" Height="27" Margin="0,770,0,0" VerticalAlignment="Top" Width="243" FontWeight="Bold"/>
+                        <TextBox x:Name="RecordNameTextBox" HorizontalAlignment="Left" Height="22" Margin="247,773,0,0" TextWrapping="Wrap" Text="OCC" VerticalAlignment="Top" Width="397" TextAlignment="Left" FontSize="14"/>
+                        <Button x:Name="RecordNameButton" Content="Default" FontWeight="Bold" HorizontalAlignment="Left" Height="22" Margin="649,773,0,0" VerticalAlignment="Top" Width="64" Click="RecordNameButton_Click"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="MonitoringTabItem" Header="Monitoring" Margin="43,-2,-81,0">
+                    <Grid>
+                        <mdi:MdiContainer x:Name="MonitoringChildContainer">
+
+                        </mdi:MdiContainer>
+
+                        <TextBox x:Name="SimX" HorizontalAlignment="Left" Height="23" Margin="943,186,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="61"/>
+                        <TextBox x:Name="SimY" HorizontalAlignment="Left" Height="23" Margin="1050,186,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
+                        <Button x:Name="Simulator" Content="Simulator" HorizontalAlignment="Left" Height="26" Margin="943,227,0,0" VerticalAlignment="Top" Width="170" Click="Simulator_Click"/>
+
+                        <TextBox x:Name="RtmX" HorizontalAlignment="Left" Height="23" Margin="943,294,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="61"/>
+                        <TextBox x:Name="RtmY" HorizontalAlignment="Left" Height="23" Margin="1050,294,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
+                        <Button x:Name="Realtime" Content="Realtime" HorizontalAlignment="Left" Height="26" Margin="943,335,0,0" VerticalAlignment="Top" Width="170" Click="Realtime_Click"/>
+                    </Grid>
+
+                </TabItem>
+                <TabItem Header="Graphic Records" Margin="82,-2,-94,0">
+                    <Grid>
+                        <mdi:MdiContainer x:Name="DataRecordGraphChildContainer">
+
+                        </mdi:MdiContainer>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Data Records" Margin="95,-2,-123,0">
+                    <Grid>
+                        <mdi:MdiContainer x:Name="DataRecordTextChildContainer"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="CuttingTabItem" Header="CNC Utilities" Margin="124,-2,-156,0">
+                    <Grid Background="#FFE5E5E5" Margin="0,-1,0,0" Width="1216">
+                        <!--<mdi:MdiContainer x:Name="CuttingChildContainer" Margin="0,3,0,16"/>-->
+                        <Button x:Name="SetFeedRateButton" Content="Set %" HorizontalAlignment="Left" Height="25" Margin="1150,69,0,0" VerticalAlignment="Top" Width="53" Click="SetFeedRateButton_Click"/>
+                        <TextBox x:Name="SetFeedRateTextBox" HorizontalAlignment="Left" Height="25" Margin="1072,69,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="62"/>
+                        <Button x:Name="SetToolBreakage" Content="Set ToolBreakage" HorizontalAlignment="Left" Height="34" Margin="1072,264,0,0" VerticalAlignment="Top" Width="112" Click="SetToolBreakage_Click"/>
+                        <Label Content="Adjust FEED RATE" HorizontalAlignment="Left" Height="26" Margin="1072,38,0,0" VerticalAlignment="Top" Width="131" FontWeight="Bold"/>
+                        <Label Content="Adjust SPINDLE SPD" HorizontalAlignment="Left" Height="26" Margin="1072,129,0,0" VerticalAlignment="Top" Width="131" FontWeight="Bold"/>
+                        <TextBox x:Name="SetSpindleSpeedTextBox" HorizontalAlignment="Left" Height="25" Margin="1072,159,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="62"/>
+                        <Button x:Name="SetSpindleSpeedButton" Content="Set %" HorizontalAlignment="Left" Height="25" Margin="1150,159,0,0" VerticalAlignment="Top" Width="53" Click="SetSpindleSpeedButton_Click"/>
+                        <Label Content="Adjust SPINDLE SPD" HorizontalAlignment="Left" Height="26" Margin="1072,435,0,0" VerticalAlignment="Top" Width="131" FontWeight="Bold"/>
+                        <Label Content="By VALUE" HorizontalAlignment="Left" Height="26" Margin="1072,453,0,0" VerticalAlignment="Top" Width="131" FontWeight="Bold"/>
+                        <TextBox x:Name="SetSpindleSpdByValTextBox" HorizontalAlignment="Left" Height="25" Margin="1072,483,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="62" TextChanged="SetSpindleSpdByValTextBox_TextChanged"/>
+                        <Button x:Name="SetSpindleSpdByValButton" Content="Set Val" HorizontalAlignment="Left" Height="25" Margin="1150,483,0,0" VerticalAlignment="Top" Width="53" Click="SetSpindleSpdByValButton_Click"/>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </Border>
+        <Border x:Name="optionsPanel_Copy" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="168" Margin="4,299,0,0" VerticalAlignment="Top" Width="167">
+            <Grid x:Name="CNCrealtimePanel" Background="#FFE5E5E5">
+                <TextBox HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="       Real-Time CNC Data" VerticalAlignment="Top" Width="165" FontWeight="Bold" Background="#FF126648" Foreground="#FFFEFEFE"/>
+                <TextBox x:Name="RealTimeXtextBox" HorizontalAlignment="Left" Height="23" Margin="65,25,0,0" TextWrapping="Wrap" Text="0.0000" VerticalAlignment="Top" Width="97" FontWeight="Bold" FontSize="18" TextAlignment="Right"/>
+                <TextBox x:Name="RealTimeYtextBox" HorizontalAlignment="Left" Height="23" Margin="65,53,0,0" TextWrapping="Wrap" Text="0.0000" VerticalAlignment="Top" Width="97" FontWeight="Bold" FontSize="18" TextAlignment="Right"/>
+                <TextBox x:Name="RealTimeZtextBox" HorizontalAlignment="Left" Height="23" Margin="65,81,0,0" TextWrapping="Wrap" Text="0.0000" VerticalAlignment="Top" Width="97" FontWeight="Bold" FontSize="18" TextAlignment="Right" RenderTransformOrigin="0.421,3.043"/>
+                <TextBox x:Name="RealTimeFeedRateTextBox" HorizontalAlignment="Left" Height="23" Margin="65,109,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="97" FontWeight="Bold" FontSize="18" TextAlignment="Right"/>
+                <TextBox x:Name="RealTimeSpindleTextBox" HorizontalAlignment="Left" Height="23" Margin="65,137,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="97" FontWeight="Bold" FontSize="18" TextAlignment="Right"/>
+                <Label Content="X (mm)" HorizontalAlignment="Left" Height="33" Margin="19,25,0,0" VerticalAlignment="Top" Width="61"/>
+                <Label Content="Y (mm)" HorizontalAlignment="Left" Height="33" Margin="19,52,0,0" VerticalAlignment="Top" Width="61"/>
+                <Label Content="Z (mm)" HorizontalAlignment="Left" Height="33" Margin="19,80,0,0" VerticalAlignment="Top" Width="61"/>
+                <Label Content="Feed Rate" HorizontalAlignment="Left" Height="33" Margin="3,110,0,0" VerticalAlignment="Top" Width="67"/>
+                <Label Content="Spindle" HorizontalAlignment="Left" Height="33" Margin="16,138,0,-5" VerticalAlignment="Top" Width="52"/>
+
+            </Grid>
+
+        </Border>
+        <Label Content="Diameter (mm)" HorizontalAlignment="Left" Height="32" Margin="5,222,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label Content="Lenght (mm)" HorizontalAlignment="Left" Height="26" Margin="17,244,0,0" VerticalAlignment="Top" Width="89"/>
+        <TextBox x:Name="ToolDiameterTextBox" HorizontalAlignment="Left" Height="20" Margin="93,224,0,0" TextWrapping="Wrap" Text="0.0000" VerticalAlignment="Top" Width="72" TextAlignment="Right" FontWeight="Bold" Background="#FFD8D8D8" FontSize="14"/>
+        <TextBox x:Name="ToolLenghtTextBox" HorizontalAlignment="Left" Height="20" Margin="93,247,0,0" TextWrapping="Wrap" Text="0.0000" VerticalAlignment="Top" Width="72" TextAlignment="Right" FontWeight="Bold" Background="#FFD8D8D8" FontSize="14"/>
+        <TextBox x:Name="ToolNumbOfTeethTextBox" HorizontalAlignment="Left" Height="20" Margin="93,271,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="72" TextAlignment="Right" FontWeight="Bold" Background="#FFD8D8D8" FontSize="14"/>
+        <Label Content="       # of Teeth" HorizontalAlignment="Left" Height="32" Margin="5,268,0,0" VerticalAlignment="Top" Width="90"/>
+        <Image Name="ImageMAL" Height="96" Margin="38,751,0,0" VerticalAlignment="Top" Width="94" Source="UBC.ico" HorizontalAlignment="Left"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="113" Margin="4,746,0,0" VerticalAlignment="Top" Width="166">
+            <Label Content=" Manufacturing Automation Laboratory" HorizontalAlignment="Right" Height="28" Margin="0,92,-1,-9" VerticalAlignment="Top" Width="165" FontSize="8" FontWeight="Bold"/>
+        </Border>
+    </Grid>
+</Window>

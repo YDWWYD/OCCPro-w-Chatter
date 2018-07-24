@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="OnlineCuttingControlProcess.RealTimeGraphs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+             xmlns:Charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:LineData="clr-namespace:XamlGeneratedNamespace;assembly=WPFToolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="300">
+    <Grid>
+        <Charting:Chart x:Name="LineChart" Margin="2,0,2,0" BorderThickness="1">
+            <Charting:Chart.PlotAreaStyle>
+                <Style TargetType="Grid">
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Background" Value="White"/>
+                </Style>
+            </Charting:Chart.PlotAreaStyle>
+            <Charting:Chart.Axes>
+                <Charting:LinearAxis x:Name="XLinearAxis" Orientation="X" Title="Sample Count (1 Spindle Turn)" ShowGridLines="True" Margin="0,0,0,-17" Maximum="0"/>
+                <Charting:LinearAxis x:Name="YLinearAxis" Title="Calculated Value (N)" Orientation="Y" ShowGridLines="True" Margin="-7,0,2,0" Maximum="0"/>
+            </Charting:Chart.Axes>
+            <Charting:LineSeries x:Name="RtmPlotLineSeries" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding [0]}" IsSelectionEnabled="True" 
+                                    AnimationSequence="FirstToLast" Background="Blue" Title="">
+                <Charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type Charting:LineDataPoint}">
+                        <Setter Property="Template" Value="{x:Null}"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Background" Value="Blue"/>
+                    </Style>
+                </Charting:LineSeries.DataPointStyle>
+            </Charting:LineSeries>
+        </Charting:Chart>
+    </Grid>
+</UserControl>

@@ -1,0 +1,167 @@
+﻿<Window x:Class="OnlineCuttingControlProcess.KalmanFilteringDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kalman Filtering Data Entry Dialog" Height="456" Width="742" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="CNCMach.ico">
+    <Grid Background="WhiteSmoke">
+        <Button x:Name="KalmanWindowButton" Content="X" Background="SteelBlue" Foreground="White" HorizontalAlignment="Left" Height="32" Margin="2,1,0,0" VerticalAlignment="Top" Width="43" FontWeight="Bold" FontSize="24"/>
+        <Border BorderBrush="Black" Background="LightBlue" BorderThickness="1" HorizontalAlignment="Left" Height="32" Margin="46,1,0,0" VerticalAlignment="Top" Width="678">
+            <Grid>
+                <Label Content="Matrix Data:" HorizontalAlignment="Left" Height="28" Margin="2,0,0,0" VerticalAlignment="Top" Width="112" FontWeight="Bold" FontSize="14"/>
+                <Label x:Name="StatusLabel" Content="Empty" Height="27" Margin="93,2,10,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" Background="AliceBlue"  BorderThickness="1" HorizontalAlignment="Left" Height="381" Margin="2,34,0,0" VerticalAlignment="Top" Width="137">
+            <Grid>
+                <Label Content="Data Entry Method" HorizontalAlignment="Left" Height="25" Margin="9,3,0,0" VerticalAlignment="Top" Width="117" FontWeight="Bold" />
+                <ComboBox x:Name="DataEntryComboBox" HorizontalAlignment="Left" Height="25" Margin="13,30,0,0" VerticalAlignment="Top" Width="110" SelectedIndex="0" SelectionChanged="DataEntryComboBox_SelectionChanged"/>
+                <Border BorderBrush="Gray" Background="Linen" BorderThickness="1" HorizontalAlignment="Left" Height="98" Margin="2,59,0,0" VerticalAlignment="Top" Width="131">
+                    <Grid>
+                        <Label Content="Matrix Indexes" Height="25" Margin="14,-2,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" HorizontalAlignment="Left"/>
+                        <Label Content="State#" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="43" Margin="44,21,0,0"/>
+                        <ComboBox x:Name="StateComboBox" HorizontalAlignment="Left" Height="19" Margin="85,24,0,0" VerticalAlignment="Top" Width="42" SelectedIndex="0" IsEnabled="False"/>
+                        <Label Content="Measurement#" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="91" Margin="-3,44,0,0"/>
+                        <ComboBox x:Name="MeasureComboBox" HorizontalAlignment="Left" Height="19" Margin="85,46,0,0" VerticalAlignment="Top" Width="42" SelectedIndex="0" IsEnabled="False"/>
+                        <Button x:Name="EnterIndexButton" Content="Enter" HorizontalAlignment="Left" Margin="63,75,0,0" VerticalAlignment="Top" Width="59" Height="19" IsEnabled="False" Click="EnterIndexButton_Click"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="Gray" Background="Beige" BorderThickness="1" HorizontalAlignment="Left" Height="117" Margin="2,158,0,0" VerticalAlignment="Top" Width="131">
+                    <Grid>
+                        <Label Content="Matrix Datafill" Height="25" Margin="14,-4,0,0" VerticalAlignment="Top" Width="95" FontWeight="Bold" HorizontalAlignment="Left"/>
+                        <Label Content="Matrix" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="48" Margin="-3,18,0,0" FontWeight="Bold"/>
+                        <ComboBox x:Name="MatrixTypeComboBox" HorizontalAlignment="Left" Height="19" Margin="43,22,0,0" VerticalAlignment="Top" Width="84" SelectedIndex="0" IsEnabled="False" FontSize="10" SelectionChanged="MatrixTypeComboBox_SelectionChanged"/>
+                        <Label Content="Fill Up" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="46" Margin="-3,40,0,0" FontWeight="Bold"/>
+                        <ComboBox x:Name="FillUpTypeComboBox" HorizontalAlignment="Left" Height="19" Margin="43,44,0,0" VerticalAlignment="Top" Width="84" SelectedIndex="0" IsEnabled="False" FontSize="10" SelectionChanged="FillUpTypeComboBox_SelectionChanged"/>
+                        <Label Content="With" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="36" Margin="7,62,0,0"/>
+                        <TextBox x:Name="FillUpDataTextBox" HorizontalAlignment="Left" Height="19" Margin="43,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" IsEnabled="False"/>
+                        <Button x:Name="EnterFillButton" Content="Enter" HorizontalAlignment="Left" Margin="63,93,0,0" VerticalAlignment="Top" Width="59" Height="19" IsEnabled="False" Click="EnterFillButton_Click"/>
+                    </Grid>
+                </Border>
+                <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Height="22" Margin="55,288,0,0" VerticalAlignment="Top" Width="75" Click="SaveButton_Click"/>
+                <Button x:Name="ClearButton" Content="Clear" HorizontalAlignment="Left" Height="22" Margin="55,314,0,0" VerticalAlignment="Top" Width="75" Click="ClearButton_Click"/>
+                <Button x:Name="OkayButton" Content="OK" HorizontalAlignment="Left" Height="24" Margin="71,349,0,0" VerticalAlignment="Top" Width="57" FontWeight="Bold" Click="OkayButton_Click"/>
+            </Grid>
+        </Border>
+        <TabControl x:Name="MatrixTab" HorizontalAlignment="Left" Height="381" Margin="141,34,0,0" VerticalAlignment="Top" Width="583">
+            <TabItem x:Name="A_TabItem" Header="   A   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="A_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="P_TabItem" Header="   P   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="P_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Q_TabItem" Header="   Q   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="Q_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="H_TabItem" Header="   H   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="H_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="R_TabItem" Header="   R   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="R_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="K_TabItem" Header="   K   ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="K_MatrixGrid" VerticalAlignment="Stretch" GridLinesVisibility="All"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" HeadersVisibility="All"
+                          SelectionMode="Extended" SelectionUnit="CellOrRowHeader" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="True"
+                          LoadingRow="MatrixGrid_LoadingRow" CellEditEnding="MatrixGrid_CellEditEnding" 
+                            ItemsSource="{Binding }">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Visibility" Value="{Binding}"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}"/>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

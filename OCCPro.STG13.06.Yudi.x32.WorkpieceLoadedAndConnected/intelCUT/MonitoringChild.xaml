@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="OnlineCuttingControlProcess.MonitoringChild"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
+             xmlns:Charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:LineData="clr-namespace:XamlGeneratedNamespace;assembly=WPFToolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <Grid>
+        <Charting:Chart x:Name="LineChart" Margin="2,0,2,0" MouseWheel="LineChart_MouseWheel" MouseMove="LineChart_MouseMove" BorderThickness="1" Unloaded="LineChart_Unloaded">
+            <Charting:Chart.Axes>
+                <Charting:LinearAxis x:Name="XLinearAxis" Orientation="X" Title="Time [msec]" ShowGridLines="True" Margin="0,0,0,-17" Maximum="0" MouseWheel="XLinearAxis_MouseWheel"/>
+                <Charting:LinearAxis x:Name="YLinearAxis" Title="Position X" Orientation="Y" ShowGridLines="True" Margin="-7,0,2,0" Maximum="0" MouseWheel="YLinearAxis_MouseWheel"/>
+            </Charting:Chart.Axes>
+            <Charting:LineSeries x:Name="SimPlotLineSeries" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding [0]}" IsSelectionEnabled="True" 
+                                    AnimationSequence="FirstToLast" Background="Blue" Title="Simulation">
+                <Charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type Charting:LineDataPoint}">
+                        <Setter Property="Template" Value="{x:Null}"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Background" Value="Blue"/>
+
+                    </Style>
+                </Charting:LineSeries.DataPointStyle>
+            </Charting:LineSeries>
+            <Charting:LineSeries x:Name="RtmPlotLineSeries" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding [1]}" IsSelectionEnabled="True" 
+                                    AnimationSequence="FirstToLast" Background="Blue" Title="Real-Time">
+                <Charting:LineSeries.DataPointStyle>
+                    <Style TargetType="{x:Type Charting:LineDataPoint}">
+                        <Setter Property="Template" Value="{x:Null}"/>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Setter Property="Background" Value="Red"/>
+
+                    </Style>
+                </Charting:LineSeries.DataPointStyle>
+            </Charting:LineSeries>
+        </Charting:Chart>
+
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Right" Height="15" VerticalAlignment="Top" Width="65" FontFamily="Global User Interface" Margin="0,5,7,0" Click="ResetButton_Click" FontWeight="Bold" RenderTransformOrigin="1.117,-1.462"/>
+
+        <CheckBox x:Name="MarkCheckBox" Content="Mark" HorizontalAlignment="Left" Height="18" Margin="5,2,0,0" VerticalAlignment="Top" Width="71"
+                    Checked="MarkCheckBox_Checked" Unchecked="MarkCheckBox_Unchecked"/>
+    </Grid>
+</UserControl>

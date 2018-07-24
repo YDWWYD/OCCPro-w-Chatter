@@ -1,0 +1,50 @@
+﻿<Window x:Class="VirtualRealtimeDataComparisionAndProcess.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="VMCpro - Virtual Machining Control Process" Height="750" Width="1250" Icon="CNCmach1.ico">
+    <Grid>
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1242">
+            <MenuItem Header="Configuration">
+                <MenuItem Header="CNC Type">
+                    <MenuItem Header="Not Specified"/>
+                    <MenuItem Header="HEIDENHAIN"/>
+                    <MenuItem Header="FANUC"/>
+                </MenuItem>
+                <MenuItem Header="Connection">
+                    <MenuItem Header="ON"/>
+                    <MenuItem Header="OFF"/>
+                </MenuItem>
+                <MenuItem Header="Workpiece Geometry">
+                    <MenuItem Header="LOAD"/>
+                    <MenuItem Header="UNLOAD"/>
+                </MenuItem>
+                <MenuItem Header="Input Data (APT)">
+                    <MenuItem Header="LOAD"/>
+                    <MenuItem Header="GENERATE"/>
+                </MenuItem>
+                <MenuItem Header="Output Data Folder"/>
+            </MenuItem>
+            <MenuItem Header="Options"/>
+            <MenuItem Header="View">
+                <MenuItem Header="Charts">
+                    <MenuItem Header="Torque vs. Time"/>
+                    <MenuItem Header="Torque vs. Distance"/>
+                    <MenuItem Header="Force vs. Time"/>
+                    <MenuItem Header="Force vs. Distance"/>
+                    <MenuItem Header="Power vs. Time"/>
+                    <MenuItem Header="Feed vs. Time"/>
+                    <MenuItem Header="X Cutting Force vs. Time"/>
+                    <MenuItem Header="Y Cutting Force vs. Time"/>
+                </MenuItem>
+                <MenuItem Header="Graphs">
+                    <MenuItem Header="Horizontal"/>
+                    <MenuItem Header="Vertical"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Run"/>
+            <MenuItem Header="Help"/>
+        </Menu>
+
+
+    </Grid>
+</Window>
